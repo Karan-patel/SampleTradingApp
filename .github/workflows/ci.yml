@@ -7,7 +7,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print repo contents for debug
+        run: ls -R
+
+      - name: Create dummy .env file (optional)
+        run: |
+          touch .env
+          echo "SAMPLE_ENV=dev" >> .env
+
       - name: Build services
-        run: docker-compose build
+        run: docker compose build
